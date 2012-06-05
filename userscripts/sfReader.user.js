@@ -1,17 +1,23 @@
 // ==UserScript==
 // @id             coldpic.sfacg.com-10d91cb4-1686-4609-ae45-303e3dcf1c18@scriptish
 // @name           image autoload for sfacg.com
-// @version        1.0
+// @version        1.1
 // @namespace      http://userscripts.org/~hitsmaxft
 // @author         hitsmaxft
 // @description    load all image in single page
 // @include        http://*.sfacg.com/AllComic/*
 // @run-at         document-end
 // ==/UserScript==
+/*
+* 1.1 add links for chapter navigation
+*/
 
 var autoload = function(){
+    var waiting_time=3000; //xx ms
+
     var divContent = document.getElementById("content");
     divContent.style.backgroundColor="black";
+
     //#imgnode
     var clonenode = divContent.getElementsByTagName('a')[0].cloneNode(true);
     //clonenode.style="";
@@ -43,7 +49,6 @@ var autoload = function(){
         link.appendChild(header);
         link.style.color="white";
         link.style.fontWeight="bold";
-        //add preVolume
         if( true  ){
             link.href=preVolume;
             header.textContent="上一回";
@@ -51,14 +56,12 @@ var autoload = function(){
             header.textContent="下一回";
             link.href=nextVolume;
             content.appendChild(link.cloneNode(true));
-            //document.body.insertBefore(link.cloneNode(true), content);
         }
     }
 
     var add_pic = function(){
         if (cur_pic_id>=max_pic_id){
             window.clearInterval(circleId);
-            //console.log("Interval finished, cleanup...");
             add_chapterlink("next");
             return;
         }
@@ -87,7 +90,7 @@ var autoload = function(){
     //first load
     if (add_pic()){
         //record interval id for auto existing
-        circleId = window.setInterval(add_pic, 300);
+        circleId = window.setInterval(add_pic, waiting_time);
     }
 
     //remove footer and advertisement

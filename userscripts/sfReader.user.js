@@ -11,7 +11,7 @@
 /*
 * 1.1 add links for chapter navigation
 */
-
+(function () { 
 var autoload = function(){
     var waiting_time=3000; //xx ms
 
@@ -106,7 +106,8 @@ function reload_img(img_id){
 
 }
 
-function contentEval(source, remove) {
+function run(source, remove) {
+
     var Eval=arguments[1]?arguments[1]:false;  
     if ('function' == typeof source && Eval) {
         source = '(' + source + ')();'
@@ -118,7 +119,9 @@ function contentEval(source, remove) {
     if(remove){
         document.body.removeChild(script);
     }
+
 }
 
-contentEval(reload_img, false);
-contentEval(autoload, true);
+run(reload_img, false);
+run(autoload, true);
+}());

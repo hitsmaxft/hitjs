@@ -1,13 +1,13 @@
 // ==UserScript==
-// id             www.amazon.com-b556bb6f-ee56-4bea-b588-998dc5bb4777@scriptish
+// @id             www.amazon.com-b556bb6f-ee56-4bea-b588-998dc5bb4777@scriptish
 // @name           Remove all personal documents
 // @version        1.2
 // @namespace      http://userscript.org/~hitsmaxft
 // @author         hitsmaxft<mfthits@gmail.com>
 // @description    batch delete item from personal documents library for Amazon kindle
 // @include        https://www.amazon.com/*
-// run-at         document-end
-// require			http://userscripts.org/usocheckup/130289.js
+// @run-at         document-end
+// -require			http://userscripts.org/usocheckup/130289.js
 // ==/UserScript==
 //
 

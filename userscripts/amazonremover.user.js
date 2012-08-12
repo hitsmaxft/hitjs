@@ -1,7 +1,7 @@
 // ==UserScript==
 // id              www.amazon.com-b556bb6f-ee56-4bea-b588-998dc5bb4777@scriptish
 // @name           Remove all personal documents
-// @version        1.3
+// @version        1.3.1
 // @namespace      http://userscript.org/~hitsmaxft
 // @author         hitsmaxft<mfthits@gmail.com>
 // @description    batch delete item from personal documents library for Amazon kindle
@@ -179,5 +179,6 @@ function contentEval(source) {
         },Timeout)
 }
 
-jQuery("#ordersList").ready(function(){contentEval(addBatchHandler, true , 4000)})
+contentEval(addBatchHandler, true , 4000)
+//jQuery("#ordersList").ready(function(){contentEval(addBatchHandler, true , 4000)})
 })()

@@ -20,6 +20,11 @@
 
 (function(){
 
+if (!/digital\/fiona\/manage/.test(window.location.href)) {
+    //console.log("not kindle library")
+    return 
+}
+
 var addBatchHandler = function(){
     var addCheckBox = function () {
         var classTr = "rowHeaderCollapsed";
@@ -39,10 +44,10 @@ var addBatchHandler = function(){
                 firstTD.appendChild(newBox)
             }
         }
-    };
-    var mklToolkit=jQuery("<div id=\"mklToolkit\"></div>");
+    }
+    var mklToolkit=jQuery("<div id=\"mklToolkit\"></div>")
 
-    var idMonitor = function () { };
+    var idMonitor = function () { }
     //add link in personal document library
     var metalink = document.createElement('a');
     var relink = document.createElement('a');

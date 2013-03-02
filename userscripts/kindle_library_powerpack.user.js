@@ -2,9 +2,8 @@
 // id              www.amazon.com-b556bb6f-ee56-4bea-b588-998dc5bb4777@scriptish
 // @namespace      http://userscript.org/~hitsmaxft
 // @name           Kindle Library Powerpack
-// @version        2.0.1
+// @version        2.0.2
 // @author         hitsmaxft<mfthits@gmail.com>
-// @updateURL      http://userscripts.org/scripts/source/130289.user.js
 // @description    batch delete item from personal documents library for Amazon kindle
 // @grant          none
 // @run-at         document-end

@@ -2,8 +2,10 @@
 // id              www.amazon.com-b556bb6f-ee56-4bea-b588-998dc5bb4777@scriptish
 // @namespace      http://userscript.org/~hitsmaxft
 // @name           Kindle Library Powerpack
-// @version        2.0.2
+// @version        2.1.0
 // @author         hitsmaxft<mfthits@gmail.com>
+// @downloadURL    http://userscripts.org/scripts/source/130289.user.js
+// @updateURL      http://userscripts.org/scripts/source/130289.user.meta.js
 // @description    batch delete item from personal documents library for Amazon kindle
 // @grant          none
 // @run-at         document-end
@@ -13,6 +15,7 @@
 
 
 // changelog
+// 2012-11-23  show 10000 items in list ^_^, no any pagination~
 // 2012-08-11  send to device supported
 //             bugfix: orginal text animation callback not work while sending documents
 // #todo
@@ -25,8 +28,12 @@ if (!/digital\/fiona\/manage/.test(window.location.href)) {
     return 
 }
 
+
 var addBatchHandler = function(){
     var addCheckBox = function () {
+
+//now display items up to 10k
+window.ykl.displaySize=10000;
         var classTr = "rowHeaderCollapsed";
         var trs = document.getElementsByClassName(classTr);
         var metaBox = document.createElement('input');

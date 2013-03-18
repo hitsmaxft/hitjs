@@ -65,7 +65,7 @@
         var rmlink = metalink.cloneNode(true);
 
         rmlink.style.color = "red";
-        rmlink.text = "Remove checked items!";
+        rmlink.textContent = "Remove checked items!";
         var doRemove = function () {
             var a = document.getElementsByClassName('rowBodyCollapsed');
             var i;
@@ -87,7 +87,7 @@
             }
         };
         ckAll = metalink.cloneNode(true);
-        ckAll.text = "Check/unCheck All";
+        ckAll.textContent = "Check/unCheck All";
         ckAll.id = "mkl_ckall";
         ckAll.onclick = function () {
             var cbs = jQuery(".removeCheckBox");
@@ -95,7 +95,7 @@
         };
 
         invckAll = metalink.cloneNode(true);
-        invckAll.text = "Inverse";
+        invckAll.textContent = "Inverse";
         invckAll.id = "mkl_invall";
         invckAll.onclick = function () {
             var cbs = document.getElementsByClassName("removeCheckBox"), i;
@@ -114,13 +114,13 @@
             ).each(function () {
                 deviceLists.append(
                     jQuery(
-                        Array.join([
+                        [
                             "<option value=\"",
                             this.accountID,
                             "\">",
                             this.name,
                             "</option>"
-                        ], "")
+                        ].join("")
                     )
                 );
             });

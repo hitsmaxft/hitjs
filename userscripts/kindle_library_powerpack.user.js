@@ -87,7 +87,7 @@
             }
         };
         ckAll = metalink.cloneNode(true);
-        ckAll.textContent = "Check/unCheck All";
+        ckAll.textContent = "Check/Uncheck All";
         ckAll.id = "mkl_ckall";
         ckAll.onclick = function () {
             var cbs = jQuery(".removeCheckBox");
@@ -106,7 +106,7 @@
 
         //device list for document deliveraty
         var deviceLists = jQuery("<select id=\"sendDevicesList\"></select>");
-        var selections = jQuery("<span class=\"filters\">you Devices:</span>");
+        var selections = jQuery("<span class=\"filters\">Your Devices:</span>");
 
         jQuery(yourDevices.ownedDeviceList)
             .filter(
@@ -151,7 +151,7 @@
                     }
                 });
             }
-        ).text("sendAll").attr("href", "#");
+        ).text("Send All").attr("href", "#");
 
         //append handle element into page content
         var div_title = document.getElementById('orders-div');

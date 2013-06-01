@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>instapaper.com.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "dotjs/instapaper.com.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>instapaper.com.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">old_link</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title_label a&#39;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span> <span class="kc">null</span><span class="o">===</span><span class="nx">old_link</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">save_link</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;a style=\&quot;color:red\&quot;&gt;[&lt;strong&gt; Save &lt;/strong&gt;] &lt;/a&gt;&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">,</span><span class="s1">&#39;javascript:void();&#39;</span><span class="p">);</span>
+
+    <span class="kd">function</span> <span class="nx">bind_save_page</span><span class="p">(</span><span class="nx">link</span><span class="p">){</span>
+        <span class="k">return</span> <span class="kd">function</span> <span class="p">(){</span>
+            <span class="kd">var</span> <span class="nx">d</span><span class="o">=</span><span class="nb">document</span><span class="p">,</span><span class="nx">z</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">),</span><span class="nx">b</span><span class="o">=</span><span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+            <span class="k">try</span><span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">b</span><span class="p">)</span><span class="k">throw</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                <span class="nx">d</span><span class="p">.</span><span class="nx">title</span><span class="o">=</span><span class="s1">&#39;(Saving...) &#39;</span><span class="o">+</span><span class="nx">d</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+                <span class="nx">z</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span><span class="s1">&#39;http://www.instapaper.com/j/oFMNViNQBStg?u=&#39;</span><span class="o">+</span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">link</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&amp;t=&#39;</span><span class="o">+</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()));</span>
+                <span class="nx">b</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">z</span><span class="p">);</span>
+            <span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;Please wait until the page has loaded. link&#39;</span><span class="o">+</span><span class="nx">link</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">};</span>
+
+    <span class="nx">save_link</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">bind_save_page</span><span class="p">(</span><span class="nx">old_link</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)));</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#title_label&#39;</span><span class="p">).</span><span class="nx">prepend</span><span class="p">(</span><span class="nx">save_link</span><span class="p">);</span>
+<span class="p">})();</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

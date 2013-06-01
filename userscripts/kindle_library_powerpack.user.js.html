@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>kindle_library_powerpack.user.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "userscripts/kindle_library_powerpack.user.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h2">
+        <a href="#content%20script">Content Script</a>
+      </div>
+      <div class="heading h2">
+        <a href="#basic%20setup">Basic setup</a>
+      </div>
+      <div class="heading h2">
+        <a href="#utils">Utils</a>
+      </div>
+      <div class="heading h2">
+        <a href="#main%20process">Main Process</a>
+      </div>
+      <div class="heading h2">
+        <a href="#content%20script%20utils">Content Script Utils</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>kindle_library_powerpack.user.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+<p>==UserScript==</p>
+
+<p>@id              www.amazon.com-b556bb6f-ee56-4bea-b588-998dc5bb4777@scriptish</p>
+
+<p>@namespace      <a href='http://userscript.org/~hitsmaxft'>http://userscript.org/~hitsmaxft</a></p>
+
+<p>@name           Kindle Library Powerpack</p>
+
+<p>@version        2.6.1</p>
+
+<p>@author         hitsmaxft <a href="&#x6D;&#x61;&#105;l&#x74;&#111;:&#109;&#x66;&#116;&#x68;&#x69;&#116;&#115;&#x40;&#103;&#109;&#97;&#105;&#x6C;.&#x63;&#x6F;&#109;">&#109;&#x66;&#116;&#x68;&#x69;&#116;&#115;&#x40;&#103;&#109;&#97;&#105;&#x6C;.&#x63;&#x6F;&#109;</a></p>
+
+<p>@description    tweaks for  Amazon kindle's personal documents library</p>
+
+<p>@grant          none</p>
+
+<p>@run-at         document-end</p>
+
+<p>@include        <a href='https://www.amazon.com/gp/*'>https://www.amazon.com/gp/*</a></p>
+
+<p>==/UserScript==</p>
+
+<p><em>changelog</em></p>
+
+<p>2012-08-11</p>
+
+<ul>
+<li>send to device supported</li>
+</ul>
+
+<p>2013-06-01</p>
+
+<ul>
+<li>refactory with minor improments</li>
+<li>disable page freshing</li>
+<li>documents by docco</li>
+</ul>
+
+<p><em>todo list</em></p>
+
+<ul>
+<li>issue: item limitation(DONE)</li>
+<li>issue: lower performance</li>
+<li>issue: buggy delete hook(NEW)</li>
+</ul>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre></pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="content%20script">
+  <h2>
+    <a href="#content%20script" name="content%20script" class="pilcrow">&#182;</a>
+    Content Script
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">isUserScript</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>contentscript for userscript</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">var</span> <span class="nx">contentScript</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="basic%20setup">
+  <h2>
+    <a href="#basic%20setup" name="basic%20setup" class="pilcrow">&#182;</a>
+    Basic setup
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Testing on url
+determie it works only in libray</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/digital\/fiona\/manage/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;not kindle library&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>globals, make effections on default actions
+items in list up to 200</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">ykl</span><span class="p">.</span><span class="nx">displaySize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">pageList</span><span class="p">.</span><span class="nx">pageSize</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">doMyFlush</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Hook Delete Action</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nb">eval</span><span class="p">(</span><span class="s2">&quot;Fion.deleteItem =&quot;</span> <span class="o">+</span> <span class="nx">Fion</span><span class="p">.</span><span class="nx">deleteItem</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span>
+                <span class="s1">&#39;window.location.reload();&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;console.log(&quot;deleted &quot;+ contentName); window.myFlushTable(contentName)&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;;&quot;</span><span class="p">)</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="utils">
+  <h2>
+    <a href="#utils" name="utils" class="pilcrow">&#182;</a>
+    Utils
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Hook default action on deleting items</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">myFlushTable</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">itemCache</span><span class="p">.</span><span class="nx">theData</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">itemCache</span><span class="p">.</span><span class="nx">theData</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">asin</span> <span class="o">==</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">itemCache</span><span class="p">.</span><span class="nx">theData</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;remove item from cache &quot;</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">parseInt</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">doMyFlush</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;repage&quot;</span><span class="p">);</span>
+                <span class="nx">pageList</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
+                <span class="nx">pageList</span><span class="p">.</span><span class="nx">gotopage</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nb">window</span><span class="p">.</span><span class="nx">doMyFlush</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">doMyFlush</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;reduce doMyFlush&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kd">var</span> <span class="nx">classTr</span> <span class="o">=</span> <span class="s2">&quot;rowHeaderCollapsed&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">metaBox</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+        <span class="nx">metaBox</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s2">&quot;checkbox&quot;</span><span class="p">;</span>
+        <span class="nx">metaBox</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s2">&quot;removeCheckBox&quot;</span><span class="p">;</span>
+        <span class="nx">metaBox</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">margin</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>Check and add checkbox for each item
+20 items in a time</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="kd">var</span> <span class="nx">addCheckBox</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">trs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="nx">classTr</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">trs</span><span class="p">.</span><span class="nx">length</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">index</span> <span class="o">&lt;</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">index</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">curTr</span> <span class="o">=</span> <span class="nx">trs</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span>
+                <span class="kd">var</span> <span class="nx">firstTD</span> <span class="o">=</span> <span class="nx">curTr</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">firstTD</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">newBox</span> <span class="o">=</span> <span class="nx">metaBox</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+                    <span class="kd">var</span> <span class="nx">rowIndex</span> <span class="o">=</span> <span class="sr">/Row([0-9]+)/</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">curTr</span><span class="p">.</span><span class="nx">id</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+                    <span class="nx">newBox</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;idChecked&quot;</span> <span class="o">+</span> <span class="nx">rowIndex</span>
+                    <span class="nx">newBox</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">)</span>
+                    <span class="nx">firstTD</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">newBox</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>Batch deleting checked items</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="kd">var</span> <span class="nx">DoRemove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;rowBodyCollapsed&#39;</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">ditem</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">rowIndex</span> <span class="o">=</span> <span class="sr">/Row([0-9]+)/</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+                <span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;idChecked&quot;</span> <span class="o">+</span> <span class="nx">rowIndex</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">item</span> <span class="o">&amp;&amp;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">checked</span> <span class="o">!=</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+
+                    <span class="nx">ditem</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;asin&#39;</span><span class="p">))</span>
+                <span class="p">}</span>
+            <span class="p">};</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">ditem</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nb">window</span><span class="p">.</span><span class="nx">doMyFlush</span> <span class="o">=</span> <span class="nx">ditem</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">ditem</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">Fion</span><span class="p">.</span><span class="nx">deleteItem</span><span class="p">(</span><span class="s1">&#39;deleteItem_&#39;</span> <span class="o">+</span> <span class="nx">ditem</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="main%20process">
+  <h2>
+    <a href="#main%20process" name="main%20process" class="pilcrow">&#182;</a>
+    Main Process
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+        <span class="kd">var</span> <span class="nx">mklToolkit</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;&lt;div id=\&quot;mklToolkit\&quot;&gt;&lt;/div&gt;&quot;</span><span class="p">)</span>
+        <span class="kd">var</span> <span class="nx">idMonitor</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p>add link in personal document library</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="kd">var</span> <span class="nx">metalink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">relink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">ckAll</span><span class="p">,</span> <span class="nx">invckAll</span><span class="p">,</span> <span class="nx">sendAll</span><span class="p">;</span>
+        <span class="nx">metalink</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">,</span> <span class="s1">&#39;javascript:void(0);&#39;</span><span class="p">);</span>
+        <span class="nx">metalink</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginLeft</span> <span class="o">=</span> <span class="s2">&quot;10px&quot;</span><span class="p">;</span>
+        <span class="nx">metalink</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginRight</span> <span class="o">=</span> <span class="s2">&quot;10px&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">rmlink</span> <span class="o">=</span> <span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+        <span class="nx">rmlink</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span>
+        <span class="nx">rmlink</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Remove checked items!&quot;</span><span class="p">;</span>
+        <span class="nx">rmlink</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">&#39;remove all items in list?&#39;</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">DoRemove</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+        <span class="nx">ckAll</span> <span class="o">=</span> <span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="nx">ckAll</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Check/unCheck All&quot;</span><span class="p">;</span>
+        <span class="nx">ckAll</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;mkl_ckall&quot;</span>
+        <span class="nx">ckAll</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">cbs</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;.removeCheckBox&quot;</span><span class="p">)</span>
+            <span class="nx">cbs</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">,</span> <span class="o">!</span><span class="p">(</span><span class="nx">cbs</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="s2">&quot;:checked&quot;</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="p">}</span>
+
+        <span class="nx">invckAll</span> <span class="o">=</span> <span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+        <span class="nx">invckAll</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Inverse&quot;</span><span class="p">;</span>
+        <span class="nx">invckAll</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;mkl_invall&quot;</span>
+        <span class="nx">invckAll</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">cbs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;removeCheckBox&quot;</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cbs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">cbs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">checked</span> <span class="o">=</span> <span class="o">!</span><span class="nx">cbs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">checked</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p>device list for document deliveraty</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="kd">var</span> <span class="nx">deviceLists</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;&lt;select id=\&quot;sendDevicesList\&quot;&gt;&lt;/select&gt;&quot;</span><span class="p">)</span>
+        <span class="kd">var</span> <span class="nx">selections</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;&lt;span class=\&quot;filters\&quot;&gt;you Devices:&lt;/span&gt;&quot;</span><span class="p">)</span>
+
+        <span class="nx">jQuery</span><span class="p">(</span><span class="nx">yourDevices</span><span class="p">.</span><span class="nx">ownedDeviceList</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">emailAddress</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">}).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">deviceLists</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span>
+                    <span class="nx">jQuery</span><span class="p">(</span>
+                        <span class="nb">Array</span><span class="p">.</span><span class="nx">join</span><span class="p">([</span>
+                                <span class="s2">&quot;&lt;option value=\&quot;&quot;</span><span class="p">,</span>
+                                <span class="k">this</span><span class="p">.</span><span class="nx">accountID</span><span class="p">,</span>
+                                <span class="s2">&quot;\&quot;&gt;&quot;</span><span class="p">,</span>
+                                <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                                <span class="s2">&quot;&lt;/option&gt;&quot;</span>
+                            <span class="p">],</span>
+                            <span class="s2">&quot;&quot;</span><span class="p">)));</span>
+            <span class="p">})</span>
+        <span class="nx">selections</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">deviceLists</span><span class="p">);</span>
+        <span class="nx">sendAll</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">)).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">contentName</span><span class="p">,</span> <span class="nx">deviceName</span><span class="p">,</span> <span class="nx">messageId</span><span class="p">,</span> <span class="nx">kindleName</span>
+                <span class="kd">var</span> <span class="nx">curOption</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;#mklToolkit option:selected&quot;</span><span class="p">)</span>
+                <span class="nx">deviceName</span> <span class="o">=</span> <span class="nx">curOption</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+                <span class="nx">kindleName</span> <span class="o">=</span> <span class="nx">curOption</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-15" id="section-15">&#182;</a>
+</div>
+<p>message_id="kindle_pdoc"</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;.removeCheckBox&quot;</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;:checked&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="nx">contentName</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;[id=&#39;Row&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; expand&#39;]&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;asin&quot;</span><span class="p">);</span>
+                        <span class="nx">messageId</span> <span class="o">=</span> <span class="s2">&quot;singleItemSend&quot;</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nx">contentName</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>text notification start</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                        <span class="kd">var</span> <span class="nx">sendingBoxId</span> <span class="o">=</span> <span class="s2">&quot;singleItemSend_&quot;</span> <span class="o">+</span> <span class="nx">contentName</span><span class="p">;</span>
+                        <span class="kd">var</span> <span class="nx">sendingBox</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">sendingBoxId</span><span class="p">);</span>
+                        <span class="nx">sendingBox</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">mykJS</span><span class="p">.</span><span class="nx">kindle_myk_popover_sending_60987</span><span class="p">;</span> <span class="c1">//&quot;Sending...&quot;</span>
+                        <span class="nx">Fion</span><span class="p">.</span><span class="nx">showActionMsgRow</span><span class="p">(</span><span class="nx">sendingBoxId</span><span class="p">);</span>
+                        <span class="nx">sendingBox</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;block&quot;</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<p>text notification continue</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">contentName</span><span class="p">,</span> <span class="nx">deviceName</span><span class="p">,</span> <span class="nx">messageId</span><span class="p">,</span> <span class="nx">kindleName</span><span class="p">)</span>
+                        <span class="k">try</span> <span class="p">{</span>
+                            <span class="nx">Fion</span><span class="p">.</span><span class="nx">sendToDevice</span><span class="p">(</span><span class="nx">contentName</span><span class="p">,</span> <span class="nx">deviceName</span><span class="p">,</span> <span class="nx">messageId</span><span class="p">,</span> <span class="nx">kindleName</span><span class="p">)</span>
+                        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">sendingBox</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">e</span><span class="p">;</span>
+                        <span class="p">}</span>
+                    <span class="p">})</span>
+            <span class="p">}).</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;sendAll&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="s2">&quot;javascript:void(0)&quot;</span><span class="p">)</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>Append handle element into page content</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">div_title</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;orders-div&#39;</span><span class="p">)</span>
+        <span class="p">;[</span>
+            <span class="nx">rmlink</span><span class="p">,</span> <span class="nx">ckAll</span><span class="p">,</span> <span class="nx">invckAll</span><span class="p">,</span>
+            <span class="nx">selections</span><span class="p">,</span> <span class="nx">sendAll</span>
+        <span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">mklToolkit</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+            <span class="p">})</span>
+
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;add toolkit ui and checkbox timer&quot;</span><span class="p">)</span>
+        <span class="nx">div_title</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">mklToolkit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">div_title</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;h2&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">nextSibling</span><span class="p">)</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">setInterval</span><span class="p">(</span><span class="nx">addCheckBox</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>Refresh list</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">pageList</span><span class="p">.</span><span class="nx">gotopage</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="content%20script%20utils">
+  <h2>
+    <a href="#content%20script%20utils" name="content%20script%20utils" class="pilcrow">&#182;</a>
+    Content Script Utils
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<p>insert content scripts</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="kd">function</span> <span class="nx">contentEval</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nb">eval</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/digital\/fiona\/manage/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;not kindle library&quot;</span><span class="p">)</span>
+            <span class="k">return</span> 
+        <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+</div>
+<p>util function, eval script in current page source</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="kd">var</span> <span class="nx">Eval</span> <span class="o">=</span> <span class="nb">eval</span> <span class="o">||</span> <span class="kc">false</span>
+        <span class="kd">var</span> <span class="nx">Timeout</span> <span class="o">=</span> <span class="nx">timeout</span> <span class="o">||</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;function&#39;</span> <span class="o">==</span> <span class="k">typeof</span> <span class="nx">source</span> <span class="o">&amp;&amp;</span> <span class="nx">Eval</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">source</span> <span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="nx">source</span> <span class="o">+</span> <span class="s1">&#39;)();&#39;</span>
+        <span class="p">}</span>
+        <span class="kd">var</span> <span class="nx">script</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;script&quot;</span><span class="p">)</span>
+        <span class="nx">script</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/javascript&quot;</span><span class="p">)</span>
+        <span class="nx">script</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">source</span>
+        <span class="nx">script</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;KindleLPP&quot;</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">script</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+</div>
+<p>document.body.removeChild(script);</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="p">},</span> <span class="nx">Timeout</span><span class="p">)</span>
+    <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-24" id="section-24">&#182;</a>
+</div>
+<p>Execute script content</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">contentEval</span><span class="p">(</span><span class="nx">contentScript</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mi">8000</span><span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-25" id="section-25">&#182;</a>
+</div>
+<p>jQuery("#ordersList").ready(function(){contentEval(addBatchHandler, true , 4000)})</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="p">})(</span><span class="kc">true</span><span class="p">)</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-26" id="section-26">&#182;</a>
+</div>
+<p>with js-beautify(sourcecode beautify) and docco (html document) from npm</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

@@ -265,7 +265,5 @@
     //jQuery("#ordersList").ready(function(){contentEval(addBatchHandler, true , 4000)})
 
 })(true)
-
-
 //with js-beautify(sourcecode beautify) and docco (html document) from npm
 // vim:ft=javascript:et:sts=4

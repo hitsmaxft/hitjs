@@ -62,7 +62,7 @@
 
 <p>@version        2.6.1</p>
 
-<p>@author         hitsmaxft <a href="&#109;&#97;&#x69;&#x6C;&#x74;&#x6F;:&#x6D;&#x66;&#x74;&#104;&#105;&#x74;&#115;&#x40;&#103;&#x6D;&#97;&#105;&#108;&#x2E;c&#111;m">&#x6D;&#x66;&#x74;&#104;&#105;&#x74;&#115;&#x40;&#103;&#x6D;&#97;&#105;&#108;&#x2E;c&#111;m</a></p>
+<p>@author         hitsmaxft <a href="&#x6D;&#x61;&#105;&#x6C;t&#111;:m&#x66;&#x74;&#104;&#105;&#116;&#115;&#64;&#x67;&#109;&#97;&#x69;&#x6C;&#46;c&#x6F;&#109;">m&#x66;&#x74;&#104;&#105;&#116;&#115;&#64;&#x67;&#109;&#97;&#x69;&#x6C;&#46;c&#x6F;&#109;</a></p>
 
 <p>@description    tweaks for  Amazon kindle's personal documents library</p>
 
@@ -346,7 +346,7 @@ items in list up to 200</p>
         <span class="kd">var</span> <span class="nx">rmlink</span> <span class="o">=</span> <span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 
         <span class="nx">rmlink</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span>
-        <span class="nx">rmlink</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Remove checked items!&quot;</span><span class="p">;</span>
+        <span class="nx">rmlink</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s2">&quot;Remove checked items!&quot;</span><span class="p">;</span>
         <span class="nx">rmlink</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">&#39;remove all items in list?&#39;</span><span class="p">))</span> <span class="p">{</span>
                 <span class="nx">DoRemove</span><span class="p">();</span>
@@ -355,7 +355,7 @@ items in list up to 200</p>
             <span class="p">}</span>
         <span class="p">};</span>
         <span class="nx">ckAll</span> <span class="o">=</span> <span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-        <span class="nx">ckAll</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Check/unCheck All&quot;</span><span class="p">;</span>
+        <span class="nx">ckAll</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s2">&quot;Check/unCheck All&quot;</span><span class="p">;</span>
         <span class="nx">ckAll</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;mkl_ckall&quot;</span>
         <span class="nx">ckAll</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">cbs</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;.removeCheckBox&quot;</span><span class="p">)</span>
@@ -363,7 +363,7 @@ items in list up to 200</p>
         <span class="p">}</span>
 
         <span class="nx">invckAll</span> <span class="o">=</span> <span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-        <span class="nx">invckAll</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Inverse&quot;</span><span class="p">;</span>
+        <span class="nx">invckAll</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="s2">&quot;Inverse&quot;</span><span class="p">;</span>
         <span class="nx">invckAll</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">&quot;mkl_invall&quot;</span>
         <span class="nx">invckAll</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">cbs</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s2">&quot;removeCheckBox&quot;</span><span class="p">);</span>
@@ -385,22 +385,21 @@ items in list up to 200</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="kd">var</span> <span class="nx">deviceLists</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;&lt;select id=\&quot;sendDevicesList\&quot;&gt;&lt;/select&gt;&quot;</span><span class="p">)</span>
-        <span class="kd">var</span> <span class="nx">selections</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;&lt;span class=\&quot;filters\&quot;&gt;you Devices:&lt;/span&gt;&quot;</span><span class="p">)</span>
+        <span class="kd">var</span> <span class="nx">selections</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="s2">&quot;&lt;span class=\&quot;filters\&quot;&gt;your Devices:&lt;/span&gt;&quot;</span><span class="p">)</span>
 
         <span class="nx">jQuery</span><span class="p">(</span><span class="nx">yourDevices</span><span class="p">.</span><span class="nx">ownedDeviceList</span><span class="p">)</span>
             <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">emailAddress</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
             <span class="p">}).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
                 <span class="nx">deviceLists</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span>
-                    <span class="nx">jQuery</span><span class="p">(</span>
-                        <span class="nb">Array</span><span class="p">.</span><span class="nx">join</span><span class="p">([</span>
-                                <span class="s2">&quot;&lt;option value=\&quot;&quot;</span><span class="p">,</span>
-                                <span class="k">this</span><span class="p">.</span><span class="nx">accountID</span><span class="p">,</span>
-                                <span class="s2">&quot;\&quot;&gt;&quot;</span><span class="p">,</span>
-                                <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
-                                <span class="s2">&quot;&lt;/option&gt;&quot;</span>
-                            <span class="p">],</span>
-                            <span class="s2">&quot;&quot;</span><span class="p">)));</span>
+                    <span class="nx">jQuery</span><span class="p">([</span>
+                            <span class="s2">&quot;&lt;option value=\&quot;&quot;</span><span class="p">,</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">accountID</span><span class="p">,</span>
+                            <span class="s2">&quot;\&quot;&gt;&quot;</span><span class="p">,</span>
+                            <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                            <span class="s2">&quot;&lt;/option&gt;&quot;</span>
+                        <span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+                    <span class="p">);</span>
             <span class="p">})</span>
         <span class="nx">selections</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">deviceLists</span><span class="p">);</span>
         <span class="nx">sendAll</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">(</span><span class="nx">metalink</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">)).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -598,8 +597,6 @@ items in list up to 200</p>
         <td class="code highlight"><div class="highlight"><pre>
 
 <span class="p">})(</span><span class="kc">true</span><span class="p">)</span>
-
-
 
 </pre></div>
         </td>

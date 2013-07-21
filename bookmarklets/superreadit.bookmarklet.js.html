@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>superreadit.bookmarklet.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "bookmarklets/superreadit.bookmarklet.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+  <script src="../fileSearch.js"></script>
+  <link rel="stylesheet" href="../fileSearch.css" />
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#superreadit">SuperReadIt</a>
+      </div>
+      <div class="heading h1">
+        <a href="#todo">TODO</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs"><div class="dox">
+  <div class="summary">
+<div class="pilwrap" id="superreadit">
+  <h1>
+    <a href="#superreadit" name="superreadit" class="pilcrow">&#182;</a>
+    SuperReadIt
+  </h1>
+</div>
+
+
+<p>switch to textview provided by instapaper</p>
+  </div>
+  <div class="body"><p>v0.1 only supports googlereader
+ v0.2 add support for normal page</p>
+
+
+<div class="pilwrap" id="todo">
+  <h1>
+    <a href="#todo" name="todo" class="pilcrow">&#182;</a>
+    TODO
+  </h1>
+</div>
+
+
+<p>v0.3.1
+v0.3.1 -readability support-;external script loadding</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="sr">/.*www\.google\.com\/reader.*/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
+                <span class="cm">/*textview in google reader*/</span>
+                <span class="kd">var</span> <span class="nx">entry_reading</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;entry expanded&#39;</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span> <span class="mi">0</span> <span class="o">&gt;=</span> <span class="nx">entry_reading</span><span class="p">.</span><span class="nx">length</span> <span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+                <span class="kd">var</span> <span class="nx">$title_link</span> <span class="o">=</span> <span class="nx">entry_reading</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">&#39;entry-title-link&#39;</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span> <span class="mi">0</span> <span class="o">&gt;=</span> <span class="nx">$title_link</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+                <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;http://www.instapaper.com/text?u=&#39;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">$title_link</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">href</span><span class="p">));</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="cm">/*for textview in normal webpage*/</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s1">&#39;http://www.instapaper.com/text?u=&#39;</span> <span class="o">+</span> <span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">while</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">)();</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
